@@ -1,0 +1,148 @@
+* Purpose
+Figure out Ruboto startup & JRuby initialization on Dalvik
+* Read
+** [[http://prezi.com/tsuouxb3z4ln/jruby-hacking-guide/][JRuby Hacking Guide by nahi]]
+** [[http://prezi.com/n7jlwvldnfyu/copy-of-jruby-source-code-reading-guide/][Copy of JRuby Source Code Reading Guide by nahi]]
+** [[https://github.com/ruboto/ruboto/wiki/Ruboto-startup][Ruboto Startup by donV]]
+
+* Conclusion
+** Ruboto
+LauncherActivity -> EntryPointActivity -> RubotoActivity -> android.app.Activity \\
+
+JRuby is initialized in the EntryPointActivity class. \\
+
+
+** JRuby
+*** org.jruby.*
+**** Main
+Create JRuby instance, Entry
+#+begin_src java
+    public static void main(String[] args) {
+        doGCJCheck();
+        
+        Main main;
+
+        if (DripMain.DRIP_RUNTIME != null) {
+            main = new Main(DripMain.DRIP_CONFIG, true);
+        } else {
+            main = new Main(true);
+        }
+        
+        try {
+            Status status = main.run(args);
+            if (status.isExit()) {
+                System.exit(status.getStatus());
+            }
+        } catch (RaiseException rj) {
+            System.exit(handleRaiseException(rj));
+        } catch (Throwable t) {
+            // print out as a nice Ruby backtrace
+//...
+        }
+    }
+
+    public Status run(String[] args) {
+        try {
+            config.processArguments(args);
+            return internalRun(); \\Here a JRuby VM is started
+        } catch (MainExitException mee) {
+            return handleMainExit(mee);
+        } catch (OutOfMemoryError oome) {
+            return handleOutOfMemory(oome);
+        }
+//...
+}
+
+    private Status internalRun() {
+//...        
+        doProcessArguments(in);
+//...        
+        Ruby runtime;
+//...
+    }
+
+#+end_src
+**** Ruby
+Run JRuby VM and evaluate scripts
++ evaluateScript
+#+begin_src java
+    public IRubyObject evalScriptlet(String script, DynamicScope scope) {
+        ThreadContext context = getCurrentContext();
+        Node node = parseEval(script, "<script>", scope, 0);
+
+        try {
+            context.preEvalScriptlet(scope);
+            return ASTInterpreter.INTERPRET_ROOT(this, context, node, context.getFrameSelf(), Block.NULL_BLOCK);
+        } catch (JumpException.ReturnJump rj) {
+            throw newLocalJumpError(RubyLocalJumpError.Reason.RETURN, (IRubyObject)rj.getValue(), "unexpected return");
+        } catch (JumpException.BreakJump bj) {
+//...
+        }
+    }
+    
+#+end_src
+
+
++ executeScript
+#+begin_src java
+    public IRubyObject executeScript(String script, String filename) {
+        byte[] bytes = script.getBytes();
+
+        Node node = parseInline(new ByteArrayInputStream(bytes), filename, null);
+        ThreadContext context = getCurrentContext();
+        
+        String oldFile = context.getFile();
+        int oldLine = context.getLine();
+        try {
+            context.setFileAndLine(node.getPosition());
+            return runInterpreter(node);
+        } finally {
+            context.setFileAndLine(oldFile, oldLine);
+        }
+    }
+#+end_src
+
+**** How a JRuby VM started
+
+***** The object constructor
+Set up a new JRuby runtime according to the properties of a specific RubyInstanceConfig object. I only leave lines with object initializing below.
+#+begin_src java
+    private Ruby(RubyInstanceConfig config) {
+//...
+        this.threadService      = new ThreadService(this);
+        if(config.isSamplingEnabled()) {
+            org.jruby.util.SimpleSampler.registerThreadContext(threadService.getCurrentContext());
+        }
+        
+        getJRubyClassLoader(); // force JRubyClassLoader to init if possible
+        
+        if (config.getCompileMode() == CompileMode.OFFIR ||
+                config.getCompileMode() == CompileMode.FORCEIR) {
+            this.staticScopeFactory = new IRStaticScopeFactory(this);
+        } else {
+            this.staticScopeFactory = new StaticScopeFactory(this);
+        }
+
+        this.beanManager        = BeanManagerFactory.create(this, config.isManagementEnabled());
+        this.jitCompiler        = new JITCompiler(this);
+        this.parserStats        = new ParserStats(this);
+        
+//...Random 
+        
+        this.beanManager.register(new Config(this));
+        this.beanManager.register(parserStats);
+        this.beanManager.register(new ClassCache(this));
+        this.beanManager.register(new org.jruby.management.Runtime(this));
+
+        this.runtimeCache = new RuntimeCache();
+        runtimeCache.initMethodCache(ClassIndex.MAX_CLASSES * MethodNames.values().length - 1);
+        
+        constantInvalidator = OptoFactory.newConstantInvalidator();
+        checkpointInvalidator = OptoFactory.newConstantInvalidator();
+//...
+        reinitialize(false);
+    }
+#+end_src
+
+***** init()
+It seems that core classes and libraries are loaded from here. Maybe this could be a key entry for speeding up JRuby on Dalvik.
