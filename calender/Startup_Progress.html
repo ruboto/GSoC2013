@@ -1,63 +1,87 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Startup<sub>Progress</sub></title>
-<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
-<meta name="title" content="Startup<sub>Progress</sub>"/>
+<!-- 2013-06-19 Wed 09:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2013-06-19T08:57+0800"/>
-<meta name="author" content=""/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
   .title  { text-align: center; }
-  .todo   { color: red; }
+  .todo   { font-family: monospace; color: red; }
   .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
   pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
   dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
     background: #ffffcc;
   }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
 </style>
 <script type="text/javascript">
@@ -65,7 +89,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
+Copyright (C) 2012  Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -106,36 +130,28 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-
 </head>
 <body>
-
-<div id="preamble">
-
-</div>
-
 <div id="content">
 <h1 class="title">Startup<sub>Progress</sub></h1>
-
-
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 Purpose</a></li>
-<li><a href="#sec-2">2 Read</a>
+<li><a href="#sec-1">1. Purpose</a></li>
+<li><a href="#sec-2">2. Read</a>
 <ul>
-<li><a href="#sec-2-1">2.1 JRuby Hacking Guide by nahi</a></li>
-<li><a href="#sec-2-2">2.2 Copy of JRuby Source Code Reading Guide by nahi</a></li>
-<li><a href="#sec-2-3">2.3 Ruboto Startup by donV</a></li>
+<li><a href="#sec-2-1">2.1. JRuby Hacking Guide by nahi</a></li>
+<li><a href="#sec-2-2">2.2. Copy of JRuby Source Code Reading Guide by nahi</a></li>
+<li><a href="#sec-2-3">2.3. Ruboto Startup by donV</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3 Conclusion</a>
+<li><a href="#sec-3">3. Conclusion</a>
 <ul>
-<li><a href="#sec-3-1">3.1 Ruboto</a></li>
-<li><a href="#sec-3-2">3.2 JRuby</a>
+<li><a href="#sec-3-1">3.1. Ruboto</a></li>
+<li><a href="#sec-3-2">3.2. JRuby</a>
 <ul>
-<li><a href="#sec-3-2-1">3.2.1 org.jruby.*</a></li>
+<li><a href="#sec-3-2-1">3.2.1. org.jruby.*</a></li>
 </ul>
 </li>
 </ul>
@@ -143,86 +159,55 @@ for the JavaScript code in this tag.
 </ul>
 </div>
 </div>
-
-<div id="outline-container-1" class="outline-2">
+<div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1"><span class="section-number-2">1</span> Purpose</h2>
 <div class="outline-text-2" id="text-1">
-
-<p>Figure out Ruboto startup &amp; JRuby initialization on Dalvik
-</p></div>
-
+<p>
+Figure out Ruboto startup &amp; JRuby initialization on Dalvik
+</p>
+</div>
 </div>
 
-<div id="outline-container-2" class="outline-2">
+<div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2"><span class="section-number-2">2</span> Read</h2>
 <div class="outline-text-2" id="text-2">
-
-
-</div>
-
-<div id="outline-container-2-1" class="outline-3">
+</div><div id="outline-container-sec-2-1" class="outline-3">
 <h3 id="sec-2-1"><span class="section-number-3">2.1</span> <a href="http://prezi.com/tsuouxb3z4ln/jruby-hacking-guide/">JRuby Hacking Guide by nahi</a></h3>
-<div class="outline-text-3" id="text-2-1">
-
 </div>
-
-</div>
-
-<div id="outline-container-2-2" class="outline-3">
+<div id="outline-container-sec-2-2" class="outline-3">
 <h3 id="sec-2-2"><span class="section-number-3">2.2</span> <a href="http://prezi.com/n7jlwvldnfyu/copy-of-jruby-source-code-reading-guide/">Copy of JRuby Source Code Reading Guide by nahi</a></h3>
-<div class="outline-text-3" id="text-2-2">
-
 </div>
-
-</div>
-
-<div id="outline-container-2-3" class="outline-3">
+<div id="outline-container-sec-2-3" class="outline-3">
 <h3 id="sec-2-3"><span class="section-number-3">2.3</span> <a href="https://github.com/ruboto/ruboto/wiki/Ruboto-startup">Ruboto Startup by donV</a></h3>
-<div class="outline-text-3" id="text-2-3">
-
-
 </div>
 </div>
-
-</div>
-
-<div id="outline-container-3" class="outline-2">
+<div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3"><span class="section-number-2">3</span> Conclusion</h2>
 <div class="outline-text-2" id="text-3">
-
-
-</div>
-
-<div id="outline-container-3-1" class="outline-3">
+</div><div id="outline-container-sec-3-1" class="outline-3">
 <h3 id="sec-3-1"><span class="section-number-3">3.1</span> Ruboto</h3>
 <div class="outline-text-3" id="text-3-1">
-
-<p>LauncherActivity -&gt; EntryPointActivity -&gt; RubotoActivity -&gt; android.app.Activity <br/>
+<p>
+LauncherActivity -&gt; EntryPointActivity -&gt; RubotoActivity -&gt; android.app.Activity <br/>
 </p>
+
 <p>
 JRuby is initialized in the EntryPointActivity class. <br/>
 </p>
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-3-2" class="outline-3">
+<div id="outline-container-sec-3-2" class="outline-3">
 <h3 id="sec-3-2"><span class="section-number-3">3.2</span> JRuby</h3>
 <div class="outline-text-3" id="text-3-2">
-
-
-</div>
-
-<div id="outline-container-3-2-1" class="outline-4">
+</div><div id="outline-container-sec-3-2-1" class="outline-4">
 <h4 id="sec-3-2-1"><span class="section-number-4">3.2.1</span> org.jruby.*</h4>
 <div class="outline-text-4" id="text-3-2-1">
-
-<ul>
-<li id="sec-3-2-1-1">Main<br/>
+</div><ol class="org-ol"><li>Main<br/><div class="outline-text-5" id="text-3-2-1-1">
+<p>
 Create JRuby instance, Entry
-
-
+</p>
+<div class="org-src-container">
 
 <pre class="src src-java">    <span style="color: #00ffff;">public</span> <span style="color: #00ffff;">static</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">main</span>(<span style="color: #98fb98;">String</span>[] <span style="color: #eedd82;">args</span>) {
         doGCJCheck();
@@ -267,21 +252,20 @@ Create JRuby instance, Entry
         <span style="color: #98fb98;">Ruby</span> <span style="color: #eedd82;">runtime</span>;
 <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">...</span>
     }
-
 </pre>
-
+</div>
+</div>
 </li>
-</ul>
-<ul>
-<li id="sec-3-2-1-2">Ruby<br/>
+
+<li>Ruby<br/><div class="outline-text-5" id="text-3-2-1-2">
+<p>
 Run JRuby VM and evaluate scripts
-<ul>
+</p>
+<ul class="org-ul">
 <li>evaluateScript
 </li>
 </ul>
-
-
-
+<div class="org-src-container">
 
 <pre class="src src-java">    <span style="color: #00ffff;">public</span> <span style="color: #98fb98;">IRubyObject</span> <span style="color: #87cefa;">evalScriptlet</span>(<span style="color: #98fb98;">String</span> <span style="color: #eedd82;">script</span>, <span style="color: #98fb98;">DynamicScope</span> <span style="color: #eedd82;">scope</span>) {
         <span style="color: #98fb98;">ThreadContext</span> <span style="color: #eedd82;">context</span> = getCurrentContext();
@@ -296,18 +280,15 @@ Run JRuby VM and evaluate scripts
 <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">...</span>
         }
     }
-
 </pre>
+</div>
 
 
-
-<ul>
+<ul class="org-ul">
 <li>executeScript
 </li>
 </ul>
-
-
-
+<div class="org-src-container">
 
 <pre class="src src-java"><span style="color: #00ffff;">public</span> <span style="color: #98fb98;">IRubyObject</span> <span style="color: #87cefa;">executeScript</span>(<span style="color: #98fb98;">String</span> <span style="color: #eedd82;">script</span>, <span style="color: #98fb98;">String</span> <span style="color: #eedd82;">filename</span>) {
     <span style="color: #98fb98;">byte</span>[] <span style="color: #eedd82;">bytes</span> = script.getBytes();
@@ -325,18 +306,14 @@ Run JRuby VM and evaluate scripts
     }
 }
 </pre>
-
-
+</div>
+</div>
 </li>
-</ul>
-<ul>
-<li id="sec-3-2-1-3">How a JRuby VM started<br/>
-
-<ul>
-<li id="sec-3-2-1-3-1">The object constructor<br/>
+<li>How a JRuby VM started<br/><ol class="org-ol"><li>The object constructor<br/><div class="outline-text-6" id="text-3-2-1-3-1">
+<p>
 Set up a new JRuby runtime according to the properties of a specific RubyInstanceConfig object. I only leave lines with object initializing below.
-
-
+</p>
+<div class="org-src-container">
 
 <pre class="src src-java">    <span style="color: #00ffff;">private</span> Ruby(<span style="color: #98fb98;">RubyInstanceConfig</span> <span style="color: #eedd82;">config</span>) {
 <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">...</span>
@@ -374,16 +351,15 @@ Set up a new JRuby runtime according to the properties of a specific RubyInstanc
         reinitialize(<span style="color: #7fffd4;">false</span>);
     }
 </pre>
-
-
+</div>
+</div>
 </li>
-</ul>
-<ul>
-<li id="sec-3-2-1-3-2">init()<br/>
+<li>init()<br/><div class="outline-text-6" id="text-3-2-1-3-2">
+<p>
 It seems that core classes and libraries are loaded from here. Maybe this could be a key entry for speeding up JRuby on Dalvik.
+</p>
 
-
-
+<div class="org-src-container">
 
 <pre class="src src-java">    <span style="color: #00ffff;">private</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">init</span>() {
         <span style="color: #ff7f24;">// </span><span style="color: #ff7f24;">Construct key services</span>
@@ -436,21 +412,25 @@ It seems that core classes and libraries are loaded from here. Maybe this could 
 <span style="color: #ff7f24;">//</span><span style="color: #ff7f24;">..        </span>
     }
 </pre>
-
+</div>
 
 <p>
 We can see that JRuby loads all core classes and builtin libs by invoking <code>bootstrap()</code> <code>initBuiltins()</code>
 </p>
-<ul>
-<li id="sec-3-2-1-3-2-1">bootstrap()<br/>
+</div>
+
+<ol class="org-ol"><li>bootstrap()<br/><div class="outline-text-7" id="text-3-2-1-3-2-1">
+<p>
 It loads all ruby core classes, so we can't try to reduce its size.
+</p>
+</div>
 </li>
-</ul>
-<ul>
-<li id="sec-3-2-1-3-2-2">initBuiltins()<br/>
+
+<li>initBuiltins()<br/><div class="outline-text-7" id="text-3-2-1-3-2-2">
+<p>
 When we go into the codes of <code>initBuiltins()</code>, we can find that JRuby loads quite a lot of ext libraries. Maybe there's something we can do with it.
-
-
+</p>
+<div class="org-src-container">
 
 <pre class="src src-java">addLazyBuiltin(<span style="color: #ffa07a;">"java.rb"</span>, <span style="color: #ffa07a;">"java"</span>, <span style="color: #ffa07a;">"org.jruby.javasupport.Java"</span>);
 addLazyBuiltin(<span style="color: #ffa07a;">"jruby.rb"</span>, <span style="color: #ffa07a;">"jruby"</span>, <span style="color: #ffa07a;">"org.jruby.ext.jruby.JRubyLibrary"</span>);
@@ -493,14 +473,14 @@ addLazyBuiltin(<span style="color: #ffa07a;">"io/try_nonblock.jar"</span>, <span
     addLazyBuiltin(<span style="color: #ffa07a;">"psych.jar"</span>, <span style="color: #ffa07a;">"psych"</span>, <span style="color: #ffa07a;">"org.jruby.ext.psych.PsychLibrary"</span>);
     addLazyBuiltin(<span style="color: #ffa07a;">"coverage.jar"</span>, <span style="color: #ffa07a;">"coverage"</span>, <span style="color: #ffa07a;">"org.jruby.ext.coverage.CoverageLibrary"</span>);
 </pre>
-
+</div>
 
 <p>
 Tracing back along the load chain, <code>org.jruby.runtime.load.LoadService#addBuiltinLibrary</code> -&gt; <code>org.jruby.runtime.load.Library#load</code> <br/>
 <code>Library#load</code> is an interface and <code>LoadService</code> implemented it:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-java"><span style="color: #00ffff;">public</span> <span style="color: #98fb98;">void</span> <span style="color: #87cefa;">load</span>(<span style="color: #98fb98;">String</span> <span style="color: #eedd82;">file</span>, <span style="color: #98fb98;">boolean</span> <span style="color: #eedd82;">wrap</span>) {
     <span style="color: #98fb98;">long</span> <span style="color: #eedd82;">startTime</span> = loadTimer.startLoad(file);
@@ -532,27 +512,22 @@ Tracing back along the load chain, <code>org.jruby.runtime.load.LoadService#addB
     }
 }
 </pre>
-
+</div>
 <p>
 It seems that JRuby has a loadTimer but without displaying library loadtime in default. I'm going to find how to get the loadtime of every library and decide which could be reduced or just optimized.
-</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</p>
+</div>
+</li></ol>
+</li></ol>
+</li></ol>
 </div>
 </div>
 </div>
 </div>
-</div>
-
-<div id="postamble">
-<p class="date">Date: 2013-06-19T08:57+0800</p>
-<p class="author">Author: </p>
-<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
-<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
-
+<div id="postamble" class="status">
+<p class="date">Created: 2013-06-19 Wed 09:08</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.3.1 (<a href="http://orgmode.org">Org</a> mode 8.0.3)</p>
+<p class="xhtml-validation"><a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a></p>
 </div>
 </body>
 </html>
