@@ -5,12 +5,12 @@ We already have had a [[https://github.com/ruboto/ruboto_benchmark_client][Rubot
 ** Enable JRuby load timer
 We can make it on PC directly by run =jruby -J-Djruby.debug.loadService=true -J-Djruby.debug.loadService.timing=true /path/to/script.rb=. Then we will get JRuby's LoadService log, here's an example
 #+begin_quote
-...
-2013-06-19T19:29:58.278+08:00: LoadService:         <- jruby/java/java_module - 32ms
-2013-06-19T19:29:58.307+08:00: LoadService:         <- jruby/java/java_package_module_template - 28ms
-2013-06-19T19:29:58.329+08:00: LoadService:         <- jruby/java/java_utilities - 21ms
-2013-06-19T19:29:59.333+08:00: LoadService:   <- classloader:jruby/kernel.rb - 376ms
-...
+... \\
+2013-06-19T19:29:58.278+08:00: LoadService:         <- jruby/java/java_module - 32ms \\
+2013-06-19T19:29:58.307+08:00: LoadService:         <- jruby/java/java_package_module_template - 28ms \\
+2013-06-19T19:29:58.329+08:00: LoadService:         <- jruby/java/java_utilities - 21ms \\
+2013-06-19T19:29:59.333+08:00: LoadService:   <- classloader:jruby/kernel.rb - 376ms \\
+... \\
 #+end_quote
 
 ** Enable JRuby load timer on Dalvik
