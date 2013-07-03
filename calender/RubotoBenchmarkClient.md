@@ -9,8 +9,13 @@
 <li><a href="#sec-1-1-1">1.1.1. Change the layout</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-2">1.2. Create a button to report all benchmarks</a></li>
-<li><a href="#sec-1-3">1.3. Make the starting mode predictable</a></li>
+<li><a href="#sec-1-2">1.2. Create a spinner for reporting all benchmarks</a></li>
+<li><a href="#sec-1-3">1.3. Make the starting mode predictable</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. Rely on something predictable</a></li>
+<li><a href="#sec-1-3-2">1.3.2. Set it before JRuby initializing</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -36,15 +41,39 @@ Add a button for jruby loading details. Temporarily use a toast to display the J
     end
     toast jruby_benchmark
 
-## Create a button to report all benchmarks
+## Create a spinner for reporting all benchmarks
 
-Modify the code of button "Report" to provide a function to report all measurements already exist. Now, there's a problem that the code of open the benchmark webpage is written in `Report#send_report`. I'm going to add a `send_all_reports` method and make some modification on `send_report` so that the browser would be opened after all benchmarks been reported.
+Modify the code of button "Report" to provide a function to report all measurements already exist. Now, there's a problem that the code of open the benchmark webpage is written in `Report#send_report`. I'm going to divide it into `send_report` & `view_results` so that the browser would be opened after all benchmarks been reported.
 
-      button :id => 44, :text => 'Report All', :text_size => button_size, :layout => button_layout,
-             :on_click_listener => proc { 
-      $benchmarks.each do |k,v|
-        Report.send_report(self, k, v)
-      end  
+    report_benchmarks = {
+      'Report' => proc{},
+      'Report single benchmark' => proc{
+        Report.send_report self, @benchmark_view.selected_view.text, $benchmarks[@benchmark_view.selected_view.text]
+      },
+      'Report all benchmarks' => proc{
+        toast "Running all benchmarks"
+        # Jump over Ruby1_8 benchmarks of 'require something', sometimes crash
+        benchmarks.each do |k,v| 
+          next if System.getProperty('jruby.compat.version').capitalize == "Ruby1_8" && k =~ /require \w+/
+          benchmark(k, v , TRUE)
+          Report.send_report self, k, $benchmarks[k]
+        end
+      }
     }
 
+Note that some of the benchmarks will be automatically jumped over in Ruby1<sub>8</sub> mode as it's currently unstable. I'll check it later.
+
 ## Make the starting mode predictable
+
+We can see that RBC now starts randomly in different compile modes and compat versions. About how to make the starting mode predictable, I've got 2 plans.
+
+    System.setProperty("jruby.compile.mode", new String[]{"OFF", "OFFIR"}[((int) (Math.random() * 2))]);
+    System.setProperty("jruby.compat.version", new String[]{"RUBY1_8", "RUBY1_9", "RUBY2_0"}[((int) (Math.random() * 3))]);
+
+### Rely on something predictable
+
+One of the predictable stuff could be something like the total running times. So that we can easily implenment it with a simple file recording the running times. Just simply change the code `((int) (Math.random() * 2))` into `running_times%2` would be okay. After that, increase the number by 1.
+
+### Set it before JRuby initializing
+
+Now, a Ruboto app starts in `org.ruboto.EntryPointActivity`.
