@@ -44,4 +44,10 @@ System.setProperty("jruby.compat.version", new String[]{"RUBY1_8", "RUBY1_9", "R
 *** Rely on something predictable
 One of the predictable stuff could be something like the total running times. So that we can easily implenment it with a simple file recording the running times. Just simply change the code =((int) (Math.random() * 2))= into =running_times%2= would be okay. After that, increase the number by 1.
 *** Set it before JRuby initializing
-Now, a Ruboto app starts in =org.ruboto.EntryPointActivity=.
+Now, a Ruboto app starts in =org.ruboto.EntryPointActivity=. What we need to do is adding another activity which runs before it to set the starting mode manually. Here's the code [[https://github.com/Nyangawa/ruboto_benchmark_client/blob/master/src/org/ruboto/benchmarks/SetModeActivity.java][SetModeActivity.java]]. //
+[[./setmode.png]]
+** Notice
+*** Do not run 'require ****' benchmarks under Ruby1.8 mode
+    It will simply crash with JRuby1.7.4.jar. This bug should be fixed soon.
+*** Do not try Ruby2.0 while using JRuby.jar
+    If you use Ruboto-core, it should be running normally. I'll check it soon in with jruby wiki.

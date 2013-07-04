@@ -16,6 +16,12 @@
 <li><a href="#sec-1-3-2">1.3.2. Set it before JRuby initializing</a></li>
 </ul>
 </li>
+<li><a href="#sec-1-4">1.4. Notice</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. Do not run 'require <b>**</b>' benchmarks under Ruby1.8 mode</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Do not try Ruby2.0 while using JRuby.jar</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -76,4 +82,14 @@ One of the predictable stuff could be something like the total running times. So
 
 ### Set it before JRuby initializing
 
-Now, a Ruboto app starts in `org.ruboto.EntryPointActivity`.
+Now, a Ruboto app starts in `org.ruboto.EntryPointActivity`. What we need to do is adding another activity which runs before it to set the starting mode manually. Here's the code [SetModeActivity.java](https://github.com/Nyangawa/ruboto_benchmark_client/blob/master/src/org/ruboto/benchmarks/SetModeActivity.java).
+
+## Notice
+
+### Do not run 'require **\*\***' benchmarks under Ruby1.8 mode
+
+It will simply crash with JRuby1.7.4.jar. This bug should be fixed soon.
+
+### Do not try Ruby2.0 while using JRuby.jar
+
+If you use Ruboto-core, it should be running normally. I'll check it soon in with jruby wiki.
