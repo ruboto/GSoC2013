@@ -82,7 +82,8 @@ One of the predictable stuff could be something like the total running times. So
 
 ### Set it before JRuby initializing
 
-Now, a Ruboto app starts in `org.ruboto.EntryPointActivity`. What we need to do is adding another activity which runs before it to set the starting mode manually. Here's the code [SetModeActivity.java](https://github.com/Nyangawa/ruboto_benchmark_client/blob/master/src/org/ruboto/benchmarks/SetModeActivity.java).
+Now, a Ruboto app starts in `org.ruboto.EntryPointActivity`. What we need to do is adding another activity which runs before it to set the starting mode manually. Here's the code [SetModeActivity.java](https://github.com/Nyangawa/ruboto_benchmark_client/blob/master/src/org/ruboto/benchmarks/SetModeActivity.java). //
+![nil](./setmode.png)
 
 ## Notice
 
