@@ -18,9 +18,28 @@ As we have finished modifying the Ruboto Benchmark Client with the customized JR
         toast "Wrote to #{logfile}"
 #+end_src
 
-* Analysis data
+* Analyse data
 For a intuitive understanding, I draw 4 pictures to compare the benchmark differences between 4 combinations of compat version and compile mode. The pictures are in =jruby_loading_logs=.
 
 According to the 4 pictures. There's not too much differences between Ruby1.9 or Ruby1.8. And the compile mode seems not important either. Of cource, above-mentioned contents are only about the startup progress.
 
 What should be done next step? Trying to dive into the libs and evaluate its necessity for Ruboto?
+
+* High time-comsuming tasks
+According to the 4 graphs, we can select a list of libs whose loading times are more than 150ms. If we could do something to optimize some of them, it could help with speeding up the startup process. They should be inspected in code detail. \\
+Some of the libs only exist in Ruboto not JRuby.
++ ruboto/widget (about 280ms)
+
++ ruboto/activity (about 600ms)
+
++ ruboto/base (about 500ms)
+
++ report.rb(Only in RBC) (about 450ms)
+  
++ jruby/java/core_ext (about 250ms)
+
++ jruby/java/java_ext (about 700ms)
+
++ jruby/java/java_ext/java.lang (about 350ms)
+
++ jruby/kernel.rb (about 250ms)
