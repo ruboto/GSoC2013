@@ -25,21 +25,35 @@ According to the 4 pictures. There's not too much differences between Ruby1.9 or
 
 What should be done next step? Trying to dive into the libs and evaluate its necessity for Ruboto?
 
-* High time-comsuming tasks
+* High time-consuming tasks
 According to the 4 graphs, we can select a list of libs whose loading times are more than 150ms. If we could do something to optimize some of them, it could help with speeding up the startup process. They should be inspected in code detail. \\
 Some of the libs only exist in Ruboto not JRuby.
 + ruboto/widget (about 280ms)
-
 + ruboto/activity (about 600ms)
-
 + ruboto/base (about 500ms)
-
 + report.rb(Only in RBC) (about 450ms)
-  
 + jruby/java/core_ext (about 250ms)
-
 + jruby/java/java_ext (about 700ms)
-
 + jruby/java/java_ext/java.lang (about 350ms)
-
 + jruby/kernel.rb (about 250ms)
+
+** About Ruboto classes
+   After reading the code in =src/ruboto=. I think it is really concise to make much optimization. The high time-consuming mainly caused by JRuby's performance but not the ruby scripts themselves.
+
+** About JRuby
+   Thanks to @donV's excellent findings, [[https://github.com/ruboto/ruboto/issues/435][issue#435]] of ruboto/ruboto lists many possible candidates to avoid loading as they're quite useless on the Dalvik platform, such as the POSIX classes or some other stuff. Here I will try to remove them and make sure they're really removable one by one.
+
++ org.jruby.runtime.opto.OptoFactory
++ org.jruby.compiler.impl.BaseBodyCompiler
++ org.jruby.management.BeanManagerImpl
++ javax/management/InstanceAlreadyExistsException
++ jnr.posix.FreeBSDPOSIX
++ jnr.posix.MacOSPOSIX
++ jnr.posix.OpenBSDPOSIX
++ jnr.posix.SolarisPOSIX
++ jnr.posix.WindowsPOSIX
++ sun.misc.Unsafe
++ org.jruby.util.unsafe.UnsafeHolder
++ java.lang.management.ManagementFactory.getGarbageCollectorMXBeans, referenced from method org.jruby.RubyGC.count
++ sun.misc.Signal referenced from method org.jruby.util.SunSignalFacade.trap
++ org.jruby.util.SunSignalFacade$JRubySignalHandler
