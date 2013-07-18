@@ -7,7 +7,14 @@
 <li><a href="#sec-3">3. High time-consuming tasks</a>
 <ul>
 <li><a href="#sec-3-1">3.1. About Ruboto classes</a></li>
-<li><a href="#sec-3-2">3.2. About JRuby</a></li>
+<li><a href="#sec-3-2">3.2. About JRuby</a>
+<ul>
+<li><a href="#sec-3-2-1">3.2.1. BeanManager</a></li>
+<li><a href="#sec-3-2-2">3.2.2. BaseBodyCompiler</a></li>
+<li><a href="#sec-3-2-3">3.2.3. non-linux posix</a></li>
+<li><a href="#sec-3-2-4">3.2.4. Section conclusion</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -97,3 +104,15 @@ Thanks to @donV's excellent findings, [issue#435](https://github.com/ruboto/rubo
 -   sun.misc.Signal referenced from method org.jruby.util.SunSignalFacade.trap
 
 -   org.jruby.util.SunSignalFacade$JRubySignalHandler
+
+### BeanManager
+
+### BaseBodyCompiler
+
+### non-linux posix
+
+These classes have been removed by `Ruboto::Util::Update.reconfigure_jruby_core(stdlib)` since 1.7.0 or earlier.
+
+### Section conclusion
+
+After removing the above classes from jruby. We still could not get a visible performance promotion as they're quite not responsible to the high time-consuming.

@@ -42,7 +42,6 @@ Some of the libs only exist in Ruboto not JRuby.
 
 ** About JRuby
    Thanks to @donV's excellent findings, [[https://github.com/ruboto/ruboto/issues/435][issue#435]] of ruboto/ruboto lists many possible candidates to avoid loading as they're quite useless on the Dalvik platform, such as the POSIX classes or some other stuff. Here I will try to remove them and make sure they're really removable one by one.
-
 + org.jruby.runtime.opto.OptoFactory
 + org.jruby.compiler.impl.BaseBodyCompiler
 + org.jruby.management.BeanManagerImpl
@@ -57,3 +56,18 @@ Some of the libs only exist in Ruboto not JRuby.
 + java.lang.management.ManagementFactory.getGarbageCollectorMXBeans, referenced from method org.jruby.RubyGC.count
 + sun.misc.Signal referenced from method org.jruby.util.SunSignalFacade.trap
 + org.jruby.util.SunSignalFacade$JRubySignalHandler
+
+*** BeanManager
+#+begin_quote
+#       modified:   src/org/jruby/management/BeanManagerFactory.java
+#       deleted:    src/org/jruby/management/BeanManagerImpl.java
+#+end_quote
+*** BaseBodyCompiler
+#+begin_quote
+#       deleted:    src/org/jruby/compiler/impl/BaseBodyCompiler.java
+#+end_quote
+*** non-linux posix
+These classes have been removed by =Ruboto::Util::Update.reconfigure_jruby_core(stdlib)= since 1.7.0 or earlier.
+
+*** Section conclusion
+After removing the above classes from jruby. We still could not get a visible performance promotion as they're quite not responsible to the high time-consuming.
