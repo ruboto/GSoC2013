@@ -58,14 +58,14 @@ Some of the libs only exist in Ruboto not JRuby.
 + org.jruby.util.SunSignalFacade$JRubySignalHandler
 
 *** BeanManager
-#+begin_quote
-#       modified:   src/org/jruby/management/BeanManagerFactory.java
-#       deleted:    src/org/jruby/management/BeanManagerImpl.java
-#+end_quote
+#+begin_verse
+modified:   src/org/jruby/management/BeanManagerFactory.java
+deleted:    src/org/jruby/management/BeanManagerImpl.java
+#+end_verse
 *** BaseBodyCompiler
-#+begin_quote
-#       deleted:    src/org/jruby/compiler/impl/BaseBodyCompiler.java
-#+end_quote
+#+begin_verse
+deleted:    src/org/jruby/compiler/impl/BaseBodyCompiler.java
+#+end_verse
 *** non-linux posix
 These classes have been removed by =Ruboto::Util::Update.reconfigure_jruby_core(stdlib)= since 1.7.0 or earlier.
 

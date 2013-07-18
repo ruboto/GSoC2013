@@ -107,7 +107,16 @@ Thanks to @donV's excellent findings, [issue#435](https://github.com/ruboto/rubo
 
 ### BeanManager
 
+<p class="verse">
+modified:   src/org/jruby/management/BeanManagerFactory.java <br/>
+deleted:    src/org/jruby/management/BeanManagerImpl.java <br/>
+</p>
+
 ### BaseBodyCompiler
+
+<p class="verse">
+deleted:    src/org/jruby/compiler/impl/BaseBodyCompiler.java <br/>
+</p>
 
 ### non-linux posix
 
