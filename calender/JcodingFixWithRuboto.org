@@ -1,0 +1,17 @@
+* rscottm's fix of Jcodings
+Inspired by [https://github.com/jruby/jcodings/pull/6]. I cloned the fixed version from [https://github.com/ruboto/jcodings] and build it on my PC. Then directly replaced the =org.jcodings= with files from this building.
+
+* Benchmark measurement
+The time data is an average of about 10 startups.
++ JRuby version: 1.7.4
++ Device: Sony LT26ii, Android-17
+| Compat version & Compile mode |  1.8 |  1.9 |
+| off                           | 6745 | 7403 |
+| offir                         | 6832 | 7447 |
+
++ Jcodings replaced JRuby
+| Compat version & Compile mode |  1.8 |  1.9 |
+| off                           | 6634 | 7379 |
+| offir                         | 6653 | 7303 |
+
+According to the charts above.It seem that Scott's optimization quite make jruby/ruboto startup faster for about 50-150ms. Of course, the data is just for reference because of the low testing times and few versions of devices and JRuby.
